@@ -18,39 +18,39 @@
 		livedemo = false,
 
 		plugins = {
-			bootstrapTooltip:        $( '[data-toggle="tooltip"]' ),
-			bootstrapModal:          $( '.modal' ),
-			bootstrapTabs:           $( '.tabs-custom' ),
-			customToggle:            $( '[data-custom-toggle]' ),
-			captcha:                 $( '.recaptcha' ),
-			campaignMonitor:         $( '.campaign-mailform' ),
-			copyrightYear:           $( '.copyright-year' ),
-			checkbox:                $( 'input[type="checkbox"]' ),
-			isotope:                 $(".isotope"),
-			lightGallery:            $( '[data-lightgallery="group"]' ),
-			lightGalleryItem:        $( '[data-lightgallery="item"]' ),
-			lightDynamicGalleryItem: $( '[data-lightgallery="dynamic"]' ),
-			materialParallax:        $( '.parallax-container' ),
-			mailchimp:               $( '.mailchimp-mailform' ),
-			owl:                     $( '.owl-carousel' ),
-			popover:                 $( '[data-toggle="popover"]' ),
-			preloader:               $( '.preloader' ),
-			rdNavbar:                $( '.rd-navbar' ),
-			rdMailForm:              $( '.rd-mailform' ),
-			rdInputLabel:            $( '.form-label' ),
-			regula:                  $( '[data-constraints]' ),
-			radio:                   $( 'input[type="radio"]' ),
-			swiper:                  $( '.swiper-container' ),
-			search:                  $( '.rd-search' ),
-			searchResults:           $( '.rd-search-results' ),
-			statefulButton:          $( '.btn-stateful' ),
-			viewAnimate:             $( '.view-animate' ),
-			wow:                     $( '.wow' ),
-			maps:                    $( '.google-map-container' ),
-			counter:                 document.querySelectorAll( '.counter' ),
-			progressLinear:          document.querySelectorAll( '.progress-linear' ),
-			progressCircle:          document.querySelectorAll( '.progress-circle' ),
-			countdown:               document.querySelectorAll( '.countdown' )
+			bootstrapTooltip: $('[data-toggle="tooltip"]'),
+			bootstrapModal: $('.modal'),
+			bootstrapTabs: $('.tabs-custom'),
+			customToggle: $('[data-custom-toggle]'),
+			captcha: $('.recaptcha'),
+			campaignMonitor: $('.campaign-mailform'),
+			copyrightYear: $('.copyright-year'),
+			checkbox: $('input[type="checkbox"]'),
+			isotope: $(".isotope"),
+			lightGallery: $('[data-lightgallery="group"]'),
+			lightGalleryItem: $('[data-lightgallery="item"]'),
+			lightDynamicGalleryItem: $('[data-lightgallery="dynamic"]'),
+			materialParallax: $('.parallax-container'),
+			mailchimp: $('.mailchimp-mailform'),
+			owl: $('.owl-carousel'),
+			popover: $('[data-toggle="popover"]'),
+			preloader: $('.preloader'),
+			rdNavbar: $('.rd-navbar'),
+			rdMailForm: $('.rd-mailform'),
+			rdInputLabel: $('.form-label'),
+			regula: $('[data-constraints]'),
+			radio: $('input[type="radio"]'),
+			swiper: $('.swiper-container'),
+			search: $('.rd-search'),
+			searchResults: $('.rd-search-results'),
+			statefulButton: $('.btn-stateful'),
+			viewAnimate: $('.view-animate'),
+			wow: $('.wow'),
+			maps: $('.google-map-container'),
+			counter: document.querySelectorAll('.counter'),
+			progressLinear: document.querySelectorAll('.progress-linear'),
+			progressCircle: document.querySelectorAll('.progress-circle'),
+			countdown: document.querySelectorAll('.countdown')
 		};
 
 	/**
@@ -58,8 +58,8 @@
 	 * @param {object} elem - jQuery object
 	 * @return {boolean}
 	 */
-	function isScrolledIntoView ( elem ) {
-		if ( isNoviBuilder ) return true;
+	function isScrolledIntoView(elem) {
+		if (isNoviBuilder) return true;
 		return elem.offset().top + elem.outerHeight() >= $window.scrollTop() && elem.offset().top <= $window.scrollTop() + $window.height();
 	}
 
@@ -68,16 +68,16 @@
 	 * @param {object} element - jQuery object
 	 * @param {function} func - init function
 	 */
-	function lazyInit( element, func ) {
+	function lazyInit(element, func) {
 		var scrollHandler = function () {
-			if ( ( !element.hasClass( 'lazy-loaded' ) && ( isScrolledIntoView( element ) ) ) ) {
+			if ((!element.hasClass('lazy-loaded') && (isScrolledIntoView(element)))) {
 				func.call();
-				element.addClass( 'lazy-loaded' );
+				element.addClass('lazy-loaded');
 			}
 		};
 
 		scrollHandler();
-		$window.on( 'scroll', scrollHandler );
+		$window.on('scroll', scrollHandler);
 	}
 
 	// Initialize scripts that require a loaded window
@@ -85,7 +85,7 @@
 		// Page loader & Page transition
 		if (plugins.preloader.length && !isNoviBuilder) {
 			pageTransition({
-				target: document.querySelector( '.page' ),
+				target: document.querySelector('.page'),
 				delay: 0,
 				duration: 500,
 				classIn: 'fadeIn',
@@ -94,10 +94,10 @@
 				conditions: function (event, link) {
 					return link && !/(\#|javascript:void\(0\)|callto:|tel:|mailto:|:\/\/)/.test(link) && !event.currentTarget.hasAttribute('data-lightgallery');
 				},
-				onTransitionStart: function ( options ) {
-					setTimeout( function () {
+				onTransitionStart: function (options) {
+					setTimeout(function () {
 						plugins.preloader.removeClass('loaded');
-					}, options.duration * .75 );
+					}, options.duration * .75);
 				},
 				onReady: function () {
 					plugins.preloader.addClass('loaded');
@@ -107,83 +107,83 @@
 		}
 
 		// Counter
-		if ( plugins.counter ) {
-			for ( var i = 0; i < plugins.counter.length; i++ ) {
+		if (plugins.counter) {
+			for (var i = 0; i < plugins.counter.length; i++) {
 				var
 					node = plugins.counter[i],
 					counter = aCounter({
 						node: node,
-						duration: node.getAttribute( 'data-duration' ) || 1000
+						duration: node.getAttribute('data-duration') || 1000
 					}),
-					scrollHandler = (function() {
-						if ( Util.inViewport( this ) && !this.classList.contains( 'animated-first' ) ) {
+					scrollHandler = (function () {
+						if (Util.inViewport(this) && !this.classList.contains('animated-first')) {
 							this.counter.run();
-							this.classList.add( 'animated-first' );
+							this.classList.add('animated-first');
 						}
-					}).bind( node ),
-					blurHandler = (function() {
-						this.counter.params.to = parseInt( this.textContent, 10 );
+					}).bind(node),
+					blurHandler = (function () {
+						this.counter.params.to = parseInt(this.textContent, 10);
 						this.counter.run();
-					}).bind( node );
+					}).bind(node);
 
-				if ( isNoviBuilder ) {
+				if (isNoviBuilder) {
 					node.counter.run();
-					node.addEventListener( 'blur', blurHandler );
+					node.addEventListener('blur', blurHandler);
 				} else {
 					scrollHandler();
-					window.addEventListener( 'scroll', scrollHandler );
+					window.addEventListener('scroll', scrollHandler);
 				}
 			}
 		}
 
 		// Progress Bar
-		if ( plugins.progressLinear ) {
-			for ( var i = 0; i < plugins.progressLinear.length; i++ ) {
+		if (plugins.progressLinear) {
+			for (var i = 0; i < plugins.progressLinear.length; i++) {
 				var
 					container = plugins.progressLinear[i],
 					counter = aCounter({
-						node: container.querySelector( '.progress-linear-counter' ),
-						duration: container.getAttribute( 'data-duration' ) || 1000,
-						onStart: function() {
+						node: container.querySelector('.progress-linear-counter'),
+						duration: container.getAttribute('data-duration') || 1000,
+						onStart: function () {
 							this.custom.bar.style.width = this.params.to + '%';
 						}
 					});
 
 				counter.custom = {
 					container: container,
-					bar: container.querySelector( '.progress-linear-bar' ),
-					onScroll: (function() {
-						if ( ( Util.inViewport( this.custom.container ) && !this.custom.container.classList.contains( 'animated' ) ) || isNoviBuilder ) {
+					bar: container.querySelector('.progress-linear-bar'),
+					onScroll: (function () {
+						if ((Util.inViewport(this.custom.container) && !this.custom.container.classList.contains('animated')) || isNoviBuilder) {
 							this.run();
-							this.custom.container.classList.add( 'animated' );
+							this.custom.container.classList.add('animated');
 						}
-					}).bind( counter ),
-					onBlur: (function() {
-						this.params.to = parseInt( this.params.node.textContent, 10 );
+					}).bind(counter),
+					onBlur: (function () {
+						this.params.to = parseInt(this.params.node.textContent, 10);
 						this.run();
-					}).bind( counter )
+					}).bind(counter)
 				};
 
-				if ( isNoviBuilder ) {
+				if (isNoviBuilder) {
 					counter.run();
-					counter.params.node.addEventListener( 'blur', counter.custom.onBlur );
+					counter.params.node.addEventListener('blur', counter.custom.onBlur);
 				} else {
 					counter.custom.onScroll();
-					document.addEventListener( 'scroll', counter.custom.onScroll );
+					document.addEventListener('scroll', counter.custom.onScroll);
 				}
 			}
 		}
 
 		// Progress Circle
-		if ( plugins.progressCircle ) {
-			for ( var i = 0; i < plugins.progressCircle.length; i++ ) {
+		if (plugins.progressCircle) {
+			for (var i = 0; i < plugins.progressCircle.length; i++) {
 				var
 					container = plugins.progressCircle[i],
 					counter = aCounter({
-						node: container.querySelector( '.progress-circle-counter' ),
+						node: container.querySelector('.progress-circle-counter'),
 						duration: 500,
-						onUpdate: function( value ) {
-							this.custom.bar.render( value * 3.6 );
+						onUpdate: function (value) {
+							this.custom.bar.render(value * 3.6);
 						}
 					});
 
@@ -191,25 +191,25 @@
 
 				counter.custom = {
 					container: container,
-					bar: aProgressCircle({ node: container.querySelector( '.progress-circle-bar' ) }),
-					onScroll: (function() {
-						if ( Util.inViewport( this.custom.container ) && !this.custom.container.classList.contains( 'animated' ) ) {
+					bar: aProgressCircle({ node: container.querySelector('.progress-circle-bar') }),
+					onScroll: (function () {
+						if (Util.inViewport(this.custom.container) && !this.custom.container.classList.contains('animated')) {
 							this.run();
-							this.custom.container.classList.add( 'animated' );
+							this.custom.container.classList.add('animated');
 						}
-					}).bind( counter ),
-					onBlur: (function() {
-						this.params.to = parseInt( this.params.node.textContent, 10 );
+					}).bind(counter),
+					onBlur: (function () {
+						this.params.to = parseInt(this.params.node.textContent, 10);
 						this.run();
-					}).bind( counter )
+					}).bind(counter)
 				};
 
-				if ( isNoviBuilder ) {
+				if (isNoviBuilder) {
 					counter.run();
-					counter.params.node.addEventListener( 'blur', counter.custom.onBlur );
+					counter.params.node.addEventListener('blur', counter.custom.onBlur);
 				} else {
 					counter.custom.onScroll();
-					window.addEventListener( 'scroll', counter.custom.onScroll );
+					window.addEventListener('scroll', counter.custom.onScroll);
 				}
 			}
 		}
@@ -219,11 +219,11 @@
 			var isogroup = [];
 			for (var i = 0; i < plugins.isotope.length; i++) {
 				var isotopeItem = plugins.isotope[i],
-						isotopeInitAttrs = {
-							itemSelector: '.isotope-item',
-							layoutMode: isotopeItem.getAttribute('data-isotope-layout') ? isotopeItem.getAttribute('data-isotope-layout') : 'masonry',
-							filter: '*'
-						};
+					isotopeInitAttrs = {
+						itemSelector: '.isotope-item',
+						layoutMode: isotopeItem.getAttribute('data-isotope-layout') ? isotopeItem.getAttribute('data-isotope-layout') : 'masonry',
+						filter: '*'
+					};
 
 				if (isotopeItem.getAttribute('data-column-width')) {
 					isotopeInitAttrs.masonry = {
@@ -256,11 +256,11 @@
 				filter.parents(".isotope-filters").find('.active').removeClass("active");
 				filter.addClass("active");
 				var iso = $('.isotope[data-isotope-group="' + this.getAttribute("data-isotope-group") + '"]'),
-						isotopeAttrs = {
-							itemSelector: '.isotope-item',
-							layoutMode: iso.attr('data-isotope-layout') ? iso.attr('data-isotope-layout') : 'masonry',
-							filter: this.getAttribute("data-isotope-filter") === '*' ? '*' : '[data-filter*="' + this.getAttribute("data-isotope-filter") + '"]'
-						};
+					isotopeAttrs = {
+						itemSelector: '.isotope-item',
+						layoutMode: iso.attr('data-isotope-layout') ? iso.attr('data-isotope-layout') : 'masonry',
+						filter: this.getAttribute("data-isotope-filter") === '*' ? '*' : '[data-filter*="' + this.getAttribute("data-isotope-filter") + '"]'
+					};
 				if (iso.attr('data-column-width')) {
 					isotopeAttrs.masonry = {
 						columnWidth: parseFloat(iso.attr('data-column-width'))
@@ -275,15 +275,15 @@
 		}
 
 		// Material Parallax
-		if ( plugins.materialParallax.length ) {
-			if ( !isNoviBuilder && !isIE && !isMobile) {
+		if (plugins.materialParallax.length) {
+			if (!isNoviBuilder && !isIE && !isMobile) {
 				plugins.materialParallax.parallax();
 			} else {
-				for ( var i = 0; i < plugins.materialParallax.length; i++ ) {
+				for (var i = 0; i < plugins.materialParallax.length; i++) {
 					var $parallax = $(plugins.materialParallax[i]);
 
-					$parallax.addClass( 'parallax-disabled' );
-					$parallax.css({ "background-image": 'url('+ $parallax.data("parallax-img") +')' });
+					$parallax.addClass('parallax-disabled');
+					$parallax.css({ "background-image": 'url(' + $parallax.data("parallax-img") + ')' });
 				}
 			}
 		}
@@ -367,78 +367,78 @@
 		 * @desc Initialize owl carousel plugin
 		 * @param {object} carousel - carousel jQuery object
 		 */
-		function initOwlCarousel ( carousel ) {
+		function initOwlCarousel(carousel) {
 			var
-				aliaces = [ '-', '-sm-', '-md-', '-lg-', '-xl-', '-xxl-' ],
-				values = [ 0, 576, 768, 992, 1200, 1600 ],
+				aliaces = ['-', '-sm-', '-md-', '-lg-', '-xl-', '-xxl-'],
+				values = [0, 576, 768, 992, 1200, 1600],
 				responsive = {};
 
-			for ( var j = 0; j < values.length; j++ ) {
-				responsive[ values[ j ] ] = {};
-				for ( var k = j; k >= -1; k-- ) {
-					if ( !responsive[ values[ j ] ][ 'items' ] && carousel.attr( 'data' + aliaces[ k ] + 'items' ) ) {
-						responsive[ values[ j ] ][ 'items' ] = k < 0 ? 1 : parseInt( carousel.attr( 'data' + aliaces[ k ] + 'items' ), 10 );
+			for (var j = 0; j < values.length; j++) {
+				responsive[values[j]] = {};
+				for (var k = j; k >= -1; k--) {
+					if (!responsive[values[j]]['items'] && carousel.attr('data' + aliaces[k] + 'items')) {
+						responsive[values[j]]['items'] = k < 0 ? 1 : parseInt(carousel.attr('data' + aliaces[k] + 'items'), 10);
 					}
-					if ( !responsive[ values[ j ] ][ 'stagePadding' ] && responsive[ values[ j ] ][ 'stagePadding' ] !== 0 && carousel.attr( 'data' + aliaces[ k ] + 'stage-padding' ) ) {
-						responsive[ values[ j ] ][ 'stagePadding' ] = k < 0 ? 0 : parseInt( carousel.attr( 'data' + aliaces[ k ] + 'stage-padding' ), 10 );
+					if (!responsive[values[j]]['stagePadding'] && responsive[values[j]]['stagePadding'] !== 0 && carousel.attr('data' + aliaces[k] + 'stage-padding')) {
+						responsive[values[j]]['stagePadding'] = k < 0 ? 0 : parseInt(carousel.attr('data' + aliaces[k] + 'stage-padding'), 10);
 					}
-					if ( !responsive[ values[ j ] ][ 'margin' ] && responsive[ values[ j ] ][ 'margin' ] !== 0 && carousel.attr( 'data' + aliaces[ k ] + 'margin' ) ) {
-						responsive[ values[ j ] ][ 'margin' ] = k < 0 ? 30 : parseInt( carousel.attr( 'data' + aliaces[ k ] + 'margin' ), 10 );
+					if (!responsive[values[j]]['margin'] && responsive[values[j]]['margin'] !== 0 && carousel.attr('data' + aliaces[k] + 'margin')) {
+						responsive[values[j]]['margin'] = k < 0 ? 30 : parseInt(carousel.attr('data' + aliaces[k] + 'margin'), 10);
 					}
 				}
 			}
 
 			// Enable custom pagination
-			if ( carousel.attr( 'data-dots-custom' ) ) {
-				carousel.on( 'initialized.owl.carousel', function ( event ) {
+			if (carousel.attr('data-dots-custom')) {
+				carousel.on('initialized.owl.carousel', function (event) {
 					var
-						carousel = $( event.currentTarget ),
-						customPag = $( carousel.attr( 'data-dots-custom' ) ),
+						carousel = $(event.currentTarget),
+						customPag = $(carousel.attr('data-dots-custom')),
 						active = 0;
 
-					if ( carousel.attr( 'data-active' ) ) {
-						active = parseInt( carousel.attr( 'data-active' ), 10 );
+					if (carousel.attr('data-active')) {
+						active = parseInt(carousel.attr('data-active'), 10);
 					}
 
-					carousel.trigger( 'to.owl.carousel', [ active, 300, true ] );
-					customPag.find( '[data-owl-item="' + active + '"]' ).addClass( 'active' );
+					carousel.trigger('to.owl.carousel', [active, 300, true]);
+					customPag.find('[data-owl-item="' + active + '"]').addClass('active');
 
-					customPag.find( '[data-owl-item]' ).on( 'click', function ( event ) {
+					customPag.find('[data-owl-item]').on('click', function (event) {
 						event.preventDefault();
-						carousel.trigger( 'to.owl.carousel', [ parseInt( this.getAttribute( 'data-owl-item' ), 10 ), 300, true ] );
-					} );
+						carousel.trigger('to.owl.carousel', [parseInt(this.getAttribute('data-owl-item'), 10), 300, true]);
+					});
 
-					carousel.on( 'translate.owl.carousel', function ( event ) {
-						customPag.find( '.active' ).removeClass( 'active' );
-						customPag.find( '[data-owl-item="' + event.item.index + '"]' ).addClass( 'active' )
-					} );
-				} );
+					carousel.on('translate.owl.carousel', function (event) {
+						customPag.find('.active').removeClass('active');
+						customPag.find('[data-owl-item="' + event.item.index + '"]').addClass('active')
+					});
+				});
 			}
 
 			// Initialize lightgallery items in cloned owl items
-			carousel.on( 'initialized.owl.carousel', function () {
-				initLightGalleryItem( carousel.find( '[data-lightgallery="item"]' ), 'lightGallery-in-carousel' );
-			} );
+			carousel.on('initialized.owl.carousel', function () {
+				initLightGalleryItem(carousel.find('[data-lightgallery="item"]'), 'lightGallery-in-carousel');
+			});
 
-			carousel.owlCarousel( {
-				autoplay:           isNoviBuilder ? false : carousel.attr( 'data-autoplay' ) !== 'false',
-				autoplayTimeout:    carousel.attr( "data-autoplay" ) ? Number( carousel.attr( "data-autoplay" ) ) : 3000,
+			carousel.owlCarousel({
+				autoplay: isNoviBuilder ? false : carousel.attr('data-autoplay') !== 'false',
+				autoplayTimeout: carousel.attr("data-autoplay") ? Number(carousel.attr("data-autoplay")) : 3000,
 				autoplayHoverPause: true,
-				loop:               isNoviBuilder ? false : carousel.attr( 'data-loop' ) !== 'false',
-				items:              1,
-				center:             carousel.attr( 'data-center' ) === 'true',
-				dotsContainer:      carousel.attr( 'data-pagination-class' ) || false,
-				navContainer:       carousel.attr( 'data-navigation-class' ) || false,
-				mouseDrag:          isNoviBuilder ? false : carousel.attr( 'data-mouse-drag' ) !== 'false',
-				nav:                carousel.attr( 'data-nav' ) === 'true',
-				dots:               carousel.attr( 'data-dots' ) === 'true',
-				dotsEach:           carousel.attr( 'data-dots-each' ) ? parseInt( carousel.attr( 'data-dots-each' ), 10 ) : false,
-				animateIn:          carousel.attr( 'data-animation-in' ) ? carousel.attr( 'data-animation-in' ) : false,
-				animateOut:         carousel.attr( 'data-animation-out' ) ? carousel.attr( 'data-animation-out' ) : false,
-				responsive:         responsive,
-				navText:            carousel.attr( 'data-nav-text' ) ? $.parseJSON( carousel.attr( 'data-nav-text' ) ) : [],
-				navClass:           carousel.attr( 'data-nav-class' ) ? $.parseJSON( carousel.attr( 'data-nav-class' ) ) : [ 'owl-prev', 'owl-next' ]
-			} );
+				loop: isNoviBuilder ? false : carousel.attr('data-loop') !== 'false',
+				items: 1,
+				center: carousel.attr('data-center') === 'true',
+				dotsContainer: carousel.attr('data-pagination-class') || false,
+				navContainer: carousel.attr('data-navigation-class') || false,
+				mouseDrag: isNoviBuilder ? false : carousel.attr('data-mouse-drag') !== 'false',
+				nav: carousel.attr('data-nav') === 'true',
+				dots: carousel.attr('data-dots') === 'true',
+				dotsEach: carousel.attr('data-dots-each') ? parseInt(carousel.attr('data-dots-each'), 10) : false,
+				animateIn: carousel.attr('data-animation-in') ? carousel.attr('data-animation-in') : false,
+				animateOut: carousel.attr('data-animation-out') ? carousel.attr('data-animation-out') : false,
+				responsive: responsive,
+				navText: carousel.attr('data-nav-text') ? $.parseJSON(carousel.attr('data-nav-text')) : [],
+				navClass: carousel.attr('data-nav-class') ? $.parseJSON(carousel.attr('data-nav-class')) : ['owl-prev', 'owl-next']
+			});
 		}
 
 		/**
@@ -479,9 +479,9 @@
 			regula.custom({
 				name: 'PhoneNumber',
 				defaultMessage: 'Invalid phone number format',
-				validator: function() {
-					if ( this.value === '' ) return true;
-					else return /^(\+\d)?[0-9\-\(\) ]{5,}$/i.test( this.value );
+				validator: function () {
+					if (this.value === '') return true;
+					else return /^(\+\d)?[0-9\-\(\) ]{5,}$/i.test(this.value);
 				}
 			});
 
@@ -498,7 +498,7 @@
 				if (e.type !== "blur") if (!$this.parent().hasClass("has-error")) return;
 				if ($this.parents('.rd-mailform').hasClass('success')) return;
 
-				if (( results = $this.regula('validate') ).length) {
+				if ((results = $this.regula('validate')).length) {
 					for (i = 0; i < results.length; i++) {
 						$this.siblings(".form-validation").text(results[i].message).parent().addClass("has-error");
 					}
@@ -617,9 +617,9 @@
 			for (var i = 0; i < plugins.captcha.length; i++) {
 				var
 					$captcha = $(plugins.captcha[i]),
-					resizeHandler = (function() {
+					resizeHandler = (function () {
 						var
-							frame = this.querySelector( 'iframe' ),
+							frame = this.querySelector('iframe'),
 							inner = this.firstElementChild,
 							inner2 = inner.firstElementChild,
 							containerRect = null,
@@ -632,14 +632,14 @@
 
 						containerRect = this.getBoundingClientRect();
 						frameRect = frame.getBoundingClientRect();
-						scale = containerRect.width/frameRect.width;
+						scale = containerRect.width / frameRect.width;
 
-						if ( scale < 1 ) {
-							inner2.style.transform = 'scale('+ scale +')';
-							inner.style.height = ( frameRect.height * scale ) + 'px';
-							inner.style.width = ( frameRect.width * scale ) + 'px';
+						if (scale < 1) {
+							inner2.style.transform = 'scale(' + scale + ')';
+							inner.style.height = (frameRect.height * scale) + 'px';
+							inner.style.width = (frameRect.width * scale) + 'px';
 						}
-					}).bind( plugins.captcha[i] );
+					}).bind(plugins.captcha[i]);
 
 				grecaptcha.render(
 					$captcha.attr('id'),
@@ -655,9 +655,9 @@
 
 				$captcha.after("<span class='form-validation'></span>");
 
-				if ( plugins.captcha[i].hasAttribute( 'data-auto-size' ) ) {
+				if (plugins.captcha[i].hasAttribute('data-auto-size')) {
 					resizeHandler();
-					window.addEventListener( 'resize', resizeHandler );
+					window.addEventListener('resize', resizeHandler);
 				}
 			}
 		};
@@ -670,9 +670,9 @@
 			plugins.bootstrapTooltip.tooltip('dispose');
 
 			if (window.innerWidth < 576) {
-				plugins.bootstrapTooltip.tooltip({placement: 'bottom'});
+				plugins.bootstrapTooltip.tooltip({ placement: 'bottom' });
 			} else {
-				plugins.bootstrapTooltip.tooltip({placement: tooltipPlacement});
+				plugins.bootstrapTooltip.tooltip({ placement: tooltipPlacement });
 			}
 		}
 
@@ -681,17 +681,17 @@
 		 * @param {object} itemsToInit - jQuery object
 		 * @param {string} [addClass] - additional gallery class
 		 */
-		function initLightGallery ( itemsToInit, addClass ) {
-			if ( !isNoviBuilder ) {
-				$( itemsToInit ).lightGallery( {
-					thumbnail: $( itemsToInit ).attr( "data-lg-thumbnail" ) !== "false",
+		function initLightGallery(itemsToInit, addClass) {
+			if (!isNoviBuilder) {
+				$(itemsToInit).lightGallery({
+					thumbnail: $(itemsToInit).attr("data-lg-thumbnail") !== "false",
 					selector: "[data-lightgallery='item']",
-					autoplay: $( itemsToInit ).attr( "data-lg-autoplay" ) === "true",
-					pause: parseInt( $( itemsToInit ).attr( "data-lg-autoplay-delay" ) ) || 5000,
+					autoplay: $(itemsToInit).attr("data-lg-autoplay") === "true",
+					pause: parseInt($(itemsToInit).attr("data-lg-autoplay-delay")) || 5000,
 					addClass: addClass,
-					mode: $( itemsToInit ).attr( "data-lg-animation" ) || "lg-slide",
-					loop: $( itemsToInit ).attr( "data-lg-loop" ) !== "false"
-				} );
+					mode: $(itemsToInit).attr("data-lg-animation") || "lg-slide",
+					loop: $(itemsToInit).attr("data-lg-loop") !== "false"
+				});
 			}
 		}
 
@@ -700,21 +700,21 @@
 		 * @param {object} itemsToInit - jQuery object
 		 * @param {string} [addClass] - additional gallery class
 		 */
-		function initDynamicLightGallery ( itemsToInit, addClass ) {
-			if ( !isNoviBuilder ) {
-				$( itemsToInit ).on( "click", function () {
-					$( itemsToInit ).lightGallery( {
-						thumbnail: $( itemsToInit ).attr( "data-lg-thumbnail" ) !== "false",
+		function initDynamicLightGallery(itemsToInit, addClass) {
+			if (!isNoviBuilder) {
+				$(itemsToInit).on("click", function () {
+					$(itemsToInit).lightGallery({
+						thumbnail: $(itemsToInit).attr("data-lg-thumbnail") !== "false",
 						selector: "[data-lightgallery='item']",
-						autoplay: $( itemsToInit ).attr( "data-lg-autoplay" ) === "true",
-						pause: parseInt( $( itemsToInit ).attr( "data-lg-autoplay-delay" ) ) || 5000,
+						autoplay: $(itemsToInit).attr("data-lg-autoplay") === "true",
+						pause: parseInt($(itemsToInit).attr("data-lg-autoplay-delay")) || 5000,
 						addClass: addClass,
-						mode: $( itemsToInit ).attr( "data-lg-animation" ) || "lg-slide",
-						loop: $( itemsToInit ).attr( "data-lg-loop" ) !== "false",
+						mode: $(itemsToInit).attr("data-lg-animation") || "lg-slide",
+						loop: $(itemsToInit).attr("data-lg-loop") !== "false",
 						dynamic: true,
-						dynamicEl: JSON.parse( $( itemsToInit ).attr( "data-lg-dynamic-elements" ) ) || []
-					} );
-				} );
+						dynamicEl: JSON.parse($(itemsToInit).attr("data-lg-dynamic-elements")) || []
+					});
+				});
 			}
 		}
 
@@ -723,9 +723,9 @@
 		 * @param {object} itemToInit - jQuery object
 		 * @param {string} [addClass] - additional gallery class
 		 */
-		function initLightGalleryItem ( itemToInit, addClass ) {
-			if ( !isNoviBuilder ) {
-				$( itemToInit ).lightGallery( {
+		function initLightGalleryItem(itemToInit, addClass) {
+			if (!isNoviBuilder) {
+				$(itemToInit).lightGallery({
 					selector: "this",
 					addClass: addClass,
 					counter: false,
@@ -739,7 +739,7 @@
 						byline: 0,
 						portrait: 0
 					}
-				} );
+				});
 			}
 		}
 
@@ -835,15 +835,15 @@
 					}, bootstrapTab));
 				}
 
-				plugins.bootstrapTabs[i].querySelectorAll( '.nav li a' ).forEach( function( tab, index ) {
-					if ( index === 0 ) {
-						tab.parentElement.classList.remove( 'active' );
-						$( tab ).tab( 'show' );
+				plugins.bootstrapTabs[i].querySelectorAll('.nav li a').forEach(function (tab, index) {
+					if (index === 0) {
+						tab.parentElement.classList.remove('active');
+						$(tab).tab('show');
 					}
-		
-					tab.addEventListener( 'click', function( event ) {
+
+					tab.addEventListener('click', function (event) {
 						event.preventDefault();
-						$( this ).tab( 'show' );
+						$(this).tab('show');
 					});
 				});
 			}
@@ -877,22 +877,22 @@
 		}
 
 		// RD Navbar
-		if ( plugins.rdNavbar.length ) {
+		if (plugins.rdNavbar.length) {
 			var
 				navbar = plugins.rdNavbar,
 				aliases = { '-': 0, '-sm-': 576, '-md-': 768, '-lg-': 992, '-xl-': 1200, '-xxl-': 1600 },
 				responsive = {};
 
-			for ( var alias in aliases ) {
-				var link = responsive[ aliases[ alias ] ] = {};
-				if ( navbar.attr( 'data'+ alias +'layout' ) )          link.layout        = navbar.attr( 'data'+ alias +'layout' );
-				if ( navbar.attr( 'data'+ alias +'device-layout' ) )   link.deviceLayout  = navbar.attr( 'data'+ alias +'device-layout' );
-				if ( navbar.attr( 'data'+ alias +'hover-on' ) )        link.focusOnHover  = navbar.attr( 'data'+ alias +'hover-on' ) === 'true';
-				if ( navbar.attr( 'data'+ alias +'auto-height' ) )     link.autoHeight    = navbar.attr( 'data'+ alias +'auto-height' ) === 'true';
-				if ( navbar.attr( 'data'+ alias +'stick-up-offset' ) ) link.stickUpOffset = navbar.attr( 'data'+ alias +'stick-up-offset' );
-				if ( navbar.attr( 'data'+ alias +'stick-up' ) )        link.stickUp       = navbar.attr( 'data'+ alias +'stick-up' ) === 'true';
-				if ( isNoviBuilder ) link.stickUp = false;
-				else if ( navbar.attr( 'data'+ alias +'stick-up' ) )   link.stickUp       = navbar.attr( 'data'+ alias +'stick-up' ) === 'true';
+			for (var alias in aliases) {
+				var link = responsive[aliases[alias]] = {};
+				if (navbar.attr('data' + alias + 'layout')) link.layout = navbar.attr('data' + alias + 'layout');
+				if (navbar.attr('data' + alias + 'device-layout')) link.deviceLayout = navbar.attr('data' + alias + 'device-layout');
+				if (navbar.attr('data' + alias + 'hover-on')) link.focusOnHover = navbar.attr('data' + alias + 'hover-on') === 'true';
+				if (navbar.attr('data' + alias + 'auto-height')) link.autoHeight = navbar.attr('data' + alias + 'auto-height') === 'true';
+				if (navbar.attr('data' + alias + 'stick-up-offset')) link.stickUpOffset = navbar.attr('data' + alias + 'stick-up-offset');
+				if (navbar.attr('data' + alias + 'stick-up')) link.stickUp = navbar.attr('data' + alias + 'stick-up') === 'true';
+				if (isNoviBuilder) link.stickUp = false;
+				else if (navbar.attr('data' + alias + 'stick-up')) link.stickUp = navbar.attr('data' + alias + 'stick-up') === 'true';
 			}
 
 			plugins.rdNavbar.RDNavbar({
@@ -1055,7 +1055,7 @@
 					.end();
 
 				s.swiper({
-					autoplay: !isNoviBuilder && $.isNumeric( s.attr('data-autoplay') ) ? s.attr('data-autoplay') : false,
+					autoplay: !isNoviBuilder && $.isNumeric(s.attr('data-autoplay')) ? s.attr('data-autoplay') : false,
 					direction: s.attr('data-direction') ? s.attr('data-direction') : "horizontal",
 					effect: s.attr('data-slide-effect') ? s.attr('data-slide-effect') : "slide",
 					speed: s.attr('data-slide-speed') ? s.attr('data-slide-speed') : 600,
@@ -1090,11 +1090,11 @@
 		}
 
 		// Owl carousel
-		if ( plugins.owl.length ) {
-			for ( var i = 0; i < plugins.owl.length; i++ ) {
-				var carousel = $( plugins.owl[ i ] );
-				plugins.owl[ i ].owl = carousel;
-				initOwlCarousel( carousel );
+		if (plugins.owl.length) {
+			for (var i = 0; i < plugins.owl.length; i++) {
+				var carousel = $(plugins.owl[i]);
+				plugins.owl[i].owl = carousel;
+				initOwlCarousel(carousel);
 			}
 		}
 
@@ -1123,7 +1123,7 @@
 				$mailchimpItem.attr('novalidate', 'true');
 				$email.attr('name', 'EMAIL');
 
-				$mailchimpItem.on('submit', $.proxy( function ( $email, event ) {
+				$mailchimpItem.on('submit', $.proxy(function ($email, event) {
 					event.preventDefault();
 
 					var $this = this;
@@ -1151,8 +1151,8 @@
 						success: function (resp) {
 							$output.html(resp.msg).addClass('active');
 							$email[0].value = '';
-							var $label = $('[for="'+ $email.attr( 'id' ) +'"]');
-							if ( $label.length ) $label.removeClass( 'focus not-empty' );
+							var $label = $('[for="' + $email.attr('id') + '"]');
+							if ($label.length) $label.removeClass('focus not-empty');
 
 							setTimeout(function () {
 								$output.removeClass("active");
@@ -1199,7 +1199,7 @@
 					});
 
 					return false;
-				}, $mailchimpItem, $email ));
+				}, $mailchimpItem, $email));
 			}
 		}
 
@@ -1250,8 +1250,8 @@
 					var inputs = $this[0].getElementsByTagName('input');
 					for (var i = 0; i < inputs.length; i++) {
 						inputs[i].value = '';
-						var label = document.querySelector( '[for="'+ inputs[i].getAttribute( 'id' ) +'"]' );
-						if( label ) label.classList.remove( 'focus', 'not-empty' );
+						var label = document.querySelector('[for="' + inputs[i].getAttribute('id') + '"]');
+						if (label) label.classList.remove('focus', 'not-empty');
 					}
 
 					return false;
@@ -1308,7 +1308,7 @@
 								$.ajax({
 									method: "POST",
 									url: "bat/reCaptcha.php",
-									data: {'g-recaptcha-response': captchaToken},
+									data: { 'g-recaptcha-response': captchaToken },
 									async: false
 								})
 									.done(function (responceCode) {
@@ -1456,8 +1456,8 @@
 				if ($this.attr("data-custom-toggle-disable-on-blur") === "true") {
 					$("body").on("click", $this, function (e) {
 						if (e.target !== e.data[0]
-								&& $(e.data.attr('data-custom-toggle')).find($(e.target)).length
-								&& e.data.find($(e.target)).length == 0) {
+							&& $(e.data.attr('data-custom-toggle')).find($(e.target)).length
+							&& e.data.find($(e.target)).length == 0) {
 							$(e.data.attr('data-custom-toggle')).add(e.data[0]).removeClass('active');
 						}
 					})
@@ -1474,16 +1474,16 @@
 		}
 
 		// Countdown
-		if ( plugins.countdown.length ) {
-			for ( var i = 0; i < plugins.countdown.length; i++) {
+		if (plugins.countdown.length) {
+			for (var i = 0; i < plugins.countdown.length; i++) {
 				var
 					node = plugins.countdown[i],
 					countdown = aCountdown({
-						node:  node,
-						from:  node.getAttribute( 'data-from' ),
-						to:    node.getAttribute( 'data-to' ),
-						count: node.getAttribute( 'data-count' ),
-						tick:  100,
+						node: node,
+						from: node.getAttribute('data-from'),
+						to: node.getAttribute('data-to'),
+						count: node.getAttribute('data-count'),
+						tick: 100,
 					});
 			}
 		}
